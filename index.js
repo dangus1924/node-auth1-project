@@ -3,7 +3,7 @@ const helmet = require('helmet')
 const server = express()
 const cors = require('cors')
 const session = require('express-session')
-const knexSessionStore = require('connect-session-knex')
+const KnexSessionStore = require('connect-session-knex')(session)
 
 const dbconfig = require('./data/db-config')
 const authRouter = require('./auth/auth-router')
@@ -25,7 +25,7 @@ server.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7,
         secure: false
     },
-    store: new knexSessionStore({
+    store: new KnexSessionStore({
         knex: dbconfig,
         createtable: true,
     }),    
