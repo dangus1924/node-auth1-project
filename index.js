@@ -4,6 +4,7 @@ const server = express()
 const cors = require('cors')
 const authRouter = require('./auth/auth-router')
 const userRouter = require('./users/users-router')
+const session = require('express-session')
 
 const port = process.env.PORT || 5000
 
