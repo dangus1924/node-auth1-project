@@ -3,7 +3,7 @@ const helmet = require('helmet')
 const server = express()
 const cors = require('cors')
 const session = require('express-session')
-const knexSessionsStore = require('connect-session-knex')
+const knexSessionStore = require('connect-session-knex')
 
 const dbconfig = require('./data/db-config')
 const authRouter = require('./auth/auth-router')
@@ -20,15 +20,15 @@ server.use(session({
     resave: false,
     saveUninitialized: false,
     secret: 'this is the secret key, no one knows how about you!',
-    cookies: {
+    cookie: {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
-        secure: false,
+        secure: false
     },
-    store: new knexSessionsStore({
+    store: new knexSessionStore({
         knex: dbconfig,
         createtable: true,
-    })    
+    }),    
 }))
 
 server.use('/auth', authRouter)
