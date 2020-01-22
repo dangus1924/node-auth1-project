@@ -34,7 +34,9 @@ server.use(session({
 server.use('/auth', authRouter)
 server.use('/users', userRouter)
 
-
+server.use('/', (req, res, next) => {
+    res.send('<h1>Welcome to my API</h1>')
+})
 
 server.use((err, req, res, next) => {
     console.log('Error:', err)
